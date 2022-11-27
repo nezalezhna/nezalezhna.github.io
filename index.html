@@ -93,42 +93,50 @@
 
             <div class="row">
                 <div class="col-sm-12">
-                    <h2>Збираємо на ремонт 4-х БТР-82 для ЗСУ <span class="badge text-bg-primary">112 248 UAH</span></h2>
+                    <h2>Збираємо на ремонт автівки для ЗСУ <span class="badge text-bg-primary">25 000 UAH</span></h2>
                     <p>
-                        <b>#тачкиорковбивачки 2.0</b>
+                        <b>#тачкиорковбивачки</b>
                     </p>
                     <p>
-                        Любі, це не просто БТРи. Це ворожі БТР-82. Наші десантники з 81 бригади добули їх в бою. <br>
-                        Перед тим, як машини перейшли на нашу сторону, вони палали. Тому в нас є трохи роботи.
+                        Нам з вами необхідно зібрати кошти на ремонт Volkswagen T4 Наша 6-та <b>#тачкиорковбивачки</b>
                     <p>
 
                     <p>
-                    Ремонт військової техніки дуже коштовний, проте нам допомагають професіонали, які більшу частину витрат беруть на себе.
-                    <br>
-                    Нам з вами необхідно закривати нагальні потреби. <br>
-                    В активній фазі ремонту дві машини, інші - на етапі діагностики.
-                </p>
-
-                    <p>
-                        На разі, нам з вами потрібно купити: камери, мастило й реле. <br>
-                        Звіти по використанню коштів за цим <a target="_blank" href="https://docs.google.com/spreadsheets/d/153P_Dgmqn9kyLPvMw-9IRvmMZkydX_lG8aNiPmHoNuk/edit#gid=0 ">посиланням</a>.
+                        Ця автівка вивозила поранених зі Сєверодонецька й Лисичанська. Дуже багато життів врятовано
+                        завдяки їй і хоробрим військовим ВЧ 3018. Вона пройшла багато обстрілів, тому в нас з вами є
+                        трохи роботи.
                     </p>
 
                     <p>
-                        Кожен день наші військові захищають нас, боронять кордони й звільняють наших людей. <br>
-                        Ми дякуємо їм за це й боронити свій фронт! Робимо все, щоб нашим військовим було зручніше виконувати свою справу.
-                        <br>
-                        Тому, працюймо!
-                        <br>
-                        <br>
+                        Проте дуже мало часу на ремонт. Вже на наступному тижні вона має повернутися на фронт й
+                        продовжувати рятувати життя нашим військовим.
+                    </p>
+
+                    <p>
+                        На разі збираємо на:
+
+                    <ul class=" list-group-numbered">
+                        <li class="list-group-item">Ремонт двигуна й ходової</li>
+                        <li class="list-group-item">Заміна гуми</li>
+                        <li class="list-group-item">Латання отворів після обстрілу</li>
+                        <li class="list-group-item">Заміна дзеркал</li>
+                        <li class="list-group-item">Ремонт системи обігріву</li>
+                    </ul>
+
+                    <i>*якщо залишаться кошти, купимо маскувальні сітки.</i>
+                    </p>
+
+                    <p>
                         Поширюйте посилання на збір та надсилайте кошти. Важлива кожна гривня.
                     </p>
 
+                    <p>
+                        Познайомитися з нашими військовими можна на сторінці нашого інстаграму <a
+                            href="https://www.instagram.com/nezalezhna.foundation/" target="_blank">@nezalezhna.foundation</a>.
+                    </p>
 
                     <p>
-                        Познайомитися з нашими військовими можна на сторінці нашого Інстаграм <a target="_blank" href="https://www.instagram.com/nezalezhna.foundation/">@nezalezhna.foundation</a>.
-                        <br>
-                        Ми зі всім впораємося, бо ми разом!
+                        Відремонтуймо автівку, яка рятує життя.
                     </p>
                 </div>
             </div>
@@ -170,7 +178,7 @@
                             </div>
 
                             <br>
-                            <a class="btn btn-primary" role="button" href="https://send.monobank.ua/jar/22eQPLeCp2"
+                            <a class="btn btn-primary" role="button" href="https://send.monobank.ua/jar/93GQ8Q4zBM"
                                target="_blank">Банка</a>
 
                             </p>
@@ -411,8 +419,8 @@
                 return response.text();
             })
             .then(function (response) {
-                let target = 112248
-                let disbursed = 74932
+                let target = 25000
+                let disbursed = 1207
                 let onBankCard = Math.round(parseInt(response) / 100)
                 let collectedUAH = onBankCard + disbursed
                 let collectedPercentage = Math.round(collectedUAH / target * 100)
