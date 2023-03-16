@@ -195,9 +195,19 @@
                             <h3 class="card-title">Transfers across Ukraine</h3>
                             <p class="card-text">
                                 Ozimok Nina Andriivna <br>
-                                IBAN: UA263220010000026203325898948 <br>
                                 TIN/EDRPOU 3216319046 <br>
-                                Purpose of payment "Charity"
+                                Purpose of payment "Charity" <br>
+
+                            <div class="input-group">
+                                <span class="input-group-text">IBAN</span>
+                                <input id="iban-copy" type="text" class="form-control"
+                                       value="UA263220010000026203325898948" readonly/>
+
+                                <button class="btn btn-outline-primary" data-clipboard-action="copy"
+                                        data-clipboard-target="#iban-copy">
+                                    Копіювати
+                                </button>
+                            </div>
                             </p>
                         </div>
                     </div>
