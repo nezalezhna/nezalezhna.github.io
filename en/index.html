@@ -94,41 +94,32 @@
             <div class="row">
                 <div class="col-sm-12">
 
-                    <h2>We are collecting for the repair of car for the Armed Forces <span class="badge text-bg-primary">25 000 UAH</span></h2>
+                    <h2>We are raising money for the cars for the frontline <span class="badge text-bg-primary">1 536 000 UAH</span></h2>
                     <p>
                         <b>#orcs-to-charсars</b>
                     </p>
                     <p>
-                        You and I need to raise funds for the repair of the Volkswagen T4 Our 6th <b>#orcs-to-charсars</b>
+                        Our charity fund provides prompt currently required help to the military and civilians in the combat areas in the East and South of Ukraine.
                     <p>
 
                     <p>
-                    This car was transporting the wounded from Severodonetsk and Lysychansk. So many lives
-                    saved thanks to her and the brave military personnel of VCH 3018.
-                    She's been through a lot of shelling, so you and I have some work to do.
-                    </p>
-
-                    <p>
-                        However, there is very little time for repairs. Already next week, she should return to the front and continue saving the lives of our soldiers.
-                    </p>
-
-                    <p>
-                        At the moment, we are collecting for:
+                    Charity Organization “Charity Fund Nezalezhna” provides all the necessary for the following:
 
                     <ul class=" list-group-numbered">
-                        <li class="list-group-item">Engine and chassis repair</li>
-                        <li class="list-group-item">Replacement of rubber</li>
-                        <li class="list-group-item">Patching holes after shelling</li>
-                        <li class="list-group-item">Replacement of mirrors</li>
-                        <li class="list-group-item">Repair of the heating system</li>
+                        <li class="list-group-item">35 military units</li>
+                        <li class="list-group-item">12 hospitals</li>
+                        <li class="list-group-item">14 communes</li>
+                        <li class="list-group-item">5 civil and military administrations</li>
                     </ul>
-
-                    <i>*if there are funds left, we will buy camouflage nets.</i>
                     </p>
 
                     <p>
-                        Expand the link to the collection and send money. Every hryvnia is important.
+                        We buy automobiles for the front lines, repair cars and APCs, supply provisions, ammunition, medicines, heating devices, drones, machinery.
                     </p>
+
+                    <p>We personally deliver supplies to the positions and people they are requested by. All needs and the transfer of the required things are confirmed with reports. We are helping now for our INDEPENDENT future. We value lives of those people who fight for us in the hell.</p>
+                    <p>If you share our values, please donate and tell your relatives and friends about us.</p>
+                    <p>We will stand up and win, because we are all together.</p>
 
                     <p>
                         Get familiar with our military guys on our Instagram <a
@@ -136,7 +127,7 @@
                     </p>
 
                     <p>
-                        Let's repair a car that saves lives.
+                        We are raising money for the cars for the frontline that saves lives!
                     </p>
 
                 </div>
@@ -228,14 +219,16 @@
                             <h3 class="card-title">PayPal</h3>
                             <p class="card-text">
 
-                            <form action="https://www.paypal.com/donate" method="post">
-                                <input type="hidden" name="hosted_button_id" value="6YHV7GVQHQA6E"/>
-                                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
-                                       border="0" name="submit" title="PayPal - The safer, easier way to pay online!"
-                                       alt="Donate with PayPal button"/>
-                                <img alt="" border="0" src="https://www.paypal.com/en_UA/i/scr/pixel.gif" width="1"
-                                     height="1"/>
-                            </form>
+                            <div class="input-group">
+
+                                <input id="pay-pal-copy" type="text" class="form-control"
+                                       value="ozimokna@gmail.com" readonly/>
+
+                                <button class="btn btn-outline-primary" data-clipboard-action="copy"
+                                        data-clipboard-target="#pay-pal-copy">
+                                    Copy
+                                </button>
+                            </div>
 
 
                             </p>
@@ -421,7 +414,7 @@
                 return response.text();
             })
             .then(function (response) {
-                let target = 25000
+                let target = 1536000
                 let disbursed = 0
                 let onBankCard = Math.round(parseInt(response) / 100)
                 let collectedUAH = onBankCard + disbursed
