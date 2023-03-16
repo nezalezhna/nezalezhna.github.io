@@ -93,42 +93,31 @@
 
             <div class="row">
                 <div class="col-sm-12">
-                    <h2>Збираємо на ремонт автівки для ЗСУ <span class="badge text-bg-primary">25 000 UAH</span></h2>
+                    <h2>Купімо 6 автівок на нуль <span class="badge text-bg-primary">1 536 000 UAH</span></h2>
                     <p>
                         <b>#тачкиорковбивачки</b>
                     </p>
                     <p>
-                        Нам з вами необхідно зібрати кошти на ремонт Volkswagen T4 Наша 6-та <b>#тачкиорковбивачки</b>
+                        Наш фонд надає оперативну актуальну допомогу військовим та цивільним в зонах бойових дій, на Сході та Півдні України.
                     <p>
 
                     <p>
-                        Ця автівка вивозила поранених зі Сєверодонецька й Лисичанська. Дуже багато життів врятовано
-                        завдяки їй і хоробрим військовим ВЧ 3018. Вона пройшла багато обстрілів, тому в нас з вами є
-                        трохи роботи.
-                    </p>
-
-                    <p>
-                        Проте дуже мало часу на ремонт. Вже на наступному тижні вона має повернутися на фронт й
-                        продовжувати рятувати життя нашим військовим.
-                    </p>
-
-                    <p>
-                        На разі збираємо на:
+                        БО «БФ Незалежна» забезпечує необхідним:
 
                     <ul class=" list-group-numbered">
-                        <li class="list-group-item">Ремонт двигуна й ходової</li>
-                        <li class="list-group-item">Заміна гуми</li>
-                        <li class="list-group-item">Латання отворів після обстрілу</li>
-                        <li class="list-group-item">Заміна дзеркал</li>
-                        <li class="list-group-item">Ремонт системи обігріву</li>
+                        <li class="list-group-item">35 військових Частин</li>
+                        <li class="list-group-item">12 лікарень</li>
+                        <li class="list-group-item">14 громад</li>
+                        <li class="list-group-item">5 цивільно-військових адміністрацій</li>
                     </ul>
 
-                    <i>*якщо залишаться кошти, купимо маскувальні сітки.</i>
                     </p>
 
-                    <p>
-                        Поширюйте посилання на збір та надсилайте кошти. Важлива кожна гривня.
-                    </p>
+
+                    <p>Ми купуємо авто на фронт, ремонтуємо машини й БТРи, забезпечуємо військових провізією, амуніцією, медичними й лікарськими засобами, зігрівайками, дронами, технікою.  </p>
+                    <p>Особисто доставляємо допомогу на позиції і в місця запиту. Всі потреби та передачу необхідного підтверджуємо звітами.</p>
+                    <p>Допомагаємо зараз заради нашого НЕЗАЛЕЖНОГО майбутнього. Цінуємо життя тих, хто бореться в пеклі за наші. Якщо ви розділяєте наші цінності, підтримайте донатами та розкажіть про нас друзям і близьким.</p>
+                    <p>Вистоїмо і переможемо, бо разом.
 
                     <p>
                         Познайомитися з нашими військовими можна на сторінці нашого інстаграму <a
@@ -136,7 +125,7 @@
                     </p>
 
                     <p>
-                        Відремонтуймо автівку, яка рятує життя.
+                        Долучайтеся до збору! Від ваших донаів залежить не тільки Перемога, а й життя нашиї воїнів.
                     </p>
                 </div>
             </div>
@@ -204,7 +193,7 @@
                                 Озімок Ніна Андріївна <br>
                                 IBAN: UA263220010000026203325898948 <br>
                                 ИНН/ЕГРПОУ 3216319046 <br>
-                                Призначення платежу «Благодійна допомога»
+                                Призначення платежу: Благодійний безповоротний внесок
                             </p>
                         </div>
                     </div>
@@ -226,14 +215,16 @@
                             <h3 class="card-title">PayPal</h3>
                             <p class="card-text">
 
-                            <form action="https://www.paypal.com/donate" method="post">
-                                <input type="hidden" name="hosted_button_id" value="6YHV7GVQHQA6E"/>
-                                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
-                                       border="0" name="submit" title="PayPal - The safer, easier way to pay online!"
-                                       alt="Donate with PayPal button"/>
-                                <img alt="" border="0" src="https://www.paypal.com/en_UA/i/scr/pixel.gif" width="1"
-                                     height="1"/>
-                            </form>
+                            <div class="input-group">
+
+                                <input id="pay-pal-copy" type="text" class="form-control"
+                                       value="ozimokna@gmail.com" readonly/>
+
+                                <button class="btn btn-outline-primary" data-clipboard-action="copy"
+                                        data-clipboard-target="#pay-pal-copy">
+                                    Копіювати
+                                </button>
+                            </div>
 
 
                             </p>
@@ -419,7 +410,7 @@
                 return response.text();
             })
             .then(function (response) {
-                let target = 25000
+                let target = 1536000
                 let disbursed = 0
                 let onBankCard = Math.round(parseInt(response) / 100)
                 let collectedUAH = onBankCard + disbursed
