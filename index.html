@@ -104,7 +104,7 @@
                     <p>
                         БО «БФ Незалежна» забезпечує необхідним:
 
-                    <ul class=" list-group-numbered">
+                    <ul class=" list-group">
                         <li class="list-group-item">35 військових Частин</li>
                         <li class="list-group-item">12 лікарень</li>
                         <li class="list-group-item">14 громад</li>
@@ -137,7 +137,7 @@
                         <div class="progress-bar progress-bar-striped progress-bar-animated"
                              role="progressbar"
                              style="width: 1%;"
-                             aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" id="jarAmount">1%
+                             aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" id="moneyCollected">1%
                         </div>
                     </div>
 
@@ -493,22 +493,20 @@
     $(document).ready(function () {
         new ClipboardJS('.btn');
 
-        fetch('https://nezalezhna.org.ua/jarAmount')
+        fetch('https://nezalezhna.org.ua/moneyCollected')
             .then(function (response) {
                 return response.text();
             })
             .then(function (response) {
                 let target = 1536000
-                let disbursed = 83322 + 79000.74
-                let onBankCard = Math.round(parseInt(response) / 100)
-                let collectedUAH = onBankCard + disbursed
+                let collectedUAH = Math.round(parseInt(response) / 100)
                 let collectedPercentage = Math.round(collectedUAH / target * 100)
 
                 if (collectedPercentage < 30) {
                     collectedPercentage = 30
                 }
 
-                const $jarAmount = $('#jarAmount');
+                const $jarAmount = $('#moneyCollected');
                 $jarAmount.css("width", collectedPercentage + "%");
                 $jarAmount.text("₴ " + collectedUAH);
             })
