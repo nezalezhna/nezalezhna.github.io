@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Незалежна | Привіт, Друже! Тобі лист.</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --danger-color: #dc3545;
+            --dark-bg: #09141f;
+            --light-bg: #f8f9fa;
+            --border-radius: 10px;
+            --transition-speed: 0.3s;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Flag Icons */
+        .fi {
+            background-size: contain;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            position: relative;
+            display: inline-block;
+            width: 1.33333333em;
+            line-height: 1em;
+        }
+        .fi::before { content: '\00a0'; }
+        .fi.fis { width: 1em; }
+        .fi-gb { background-image: url(images/flags/gb.svg); }
+        .fi-ua { background-image: url(images/flags/ua.svg); }
+
+        /* Header */
+        .catalog-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            height: 240px;
+            background-color: var(--dark-bg);
+            background-image: url('letters/banner.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            border-radius: var(--border-radius);
+        }
+
+        /* Cards */
+        .card {
+            height: 100%;
+            transition: transform var(--transition-speed) ease,
+            box-shadow var(--transition-speed) ease;
+            border: none;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .card:not(.reserved):hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card.reserved {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .card-img-top {
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .card-description {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .reserved-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(220, 53, 69, 0.9);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        /* Loader */
+        .loader {
+            display: none;
+            text-align: center;
+            padding: 50px;
+        }
+        .loader.active { display: block; }
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        /* Modal */
+        .modal-fullscreen .modal-body { padding: 0; }
+
+        .modal-content-wrapper {
+            display: flex;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slider-section {
+            flex: 0 0 66.666%;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            position: relative;
+        }
+
+        .info-section {
+            flex: 0 0 33.333%;
+            background-color: #fff;
+            overflow-y: auto;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Image Slider */
+        .image-slider {
+            width: 100%;
+            height: 100%;
+            max-height: 80vh;
+        }
+
+        .carousel {
+            height: 100%;
+        }
+
+        .carousel-inner {
+            height: 100%;
+        }
+
+        .carousel-item {
+            height: 100%;
+        }
+
+        .carousel-item img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 50px;
+            opacity: 0.8;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            opacity: 1;
+        }
+
+        .carousel-indicators {
+            margin-bottom: 20px;
+        }
+
+        .carousel-indicators button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin: 0 5px;
+            background-color: #fff;
+        }
+
+        /* Video Container */
+        .video-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-container video {
+            max-width: 100%;
+            max-height: 80vh;
+            width: auto;
+            height: auto;
+        }
+
+        /* Info Section */
+        .info-header {
+            margin-bottom: 30px;
+        }
+
+        .info-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .description-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .booking-area {
+            margin-top: auto;
+        }
+
+        .booking-form {
+            display: none;
+            margin-top: 20px;
+        }
+        .booking-form.active { display: block; }
+
+        /* Close Button */
+        .modal-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1060;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .modal-close-btn:hover {
+            background-color: #fff;
+            transform: scale(1.1);
+        }
+
+        .modal-close-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .modal-content-wrapper {
+                flex-direction: column;
+            }
+
+            .slider-section {
+                flex: 0 0 auto;
+                height: 50vh;
+                min-height: 300px;
+            }
+
+            .info-section {
+                flex: 1 1 auto;
+                min-height: 50vh;
+            }
+
+            .image-slider,
+            .video-container video {
+                max-height: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slider-section {
+                height: 40vh;
+                min-height: 250px;
+                padding: 20px;
+            }
+
+            .info-section {
+                padding: 20px;
+                min-height: 60vh;
+            }
+
+            .info-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .modal-close-btn {
+                top: 10px;
+                right: 10px;
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="navbar shadow-sm">
+        <div class="container">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+                <strong>Незалежна</strong>
+            </a>
+
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group" role="group" aria-label="Соціальні мережі">
+                    <a href="https://www.instagram.com/nezalezhna.foundation/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="btn"
+                       aria-label="Instagram">
+                        <i class="bi bi-instagram" style="font-size: 1.5em"></i>
+                    </a>
+                    <a href="https://www.facebook.com/nezalezhna.foundation"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="btn"
+                       aria-label="Facebook">
+                        <i class="bi bi-facebook" style="font-size: 1.5em"></i>
+                    </a>
+                </div>
+
+                <div class="btn-group align-items-center" role="group" aria-label="Мова">
+                    <a href="#" class="btn btn-link" aria-current="page" aria-label="Українська">
+                        <i class="fi fi-ua" style="font-size: 1.2em"></i>
+                    </a>
+                    <a href="/en/index.html" class="btn btn-link" aria-label="English">
+                        <i class="fi fi-gb" style="font-size: 1.2em"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="py-5 bg-light">
+    <div class="container">
+        <div class="catalog-header" role="banner"></div>
+
+        <div class="loader active" role="status">
+            <div class="spinner-border text-primary">
+                <span class="visually-hidden">Завантаження...</span>
+            </div>
+            <p class="mt-3">Завантаження листів...</p>
+        </div>
+
+        <div id="catalogGrid" class="row g-4"></div>
+    </div>
+</main>
+
+<footer class="container">
+    <p class="float-end"><br><a href="#" class="btn btn-secondary" role="button">Вгору</a></p>
+    <p><br>&copy; 2025 Незалежна</p>
+</footer>
+
+<!-- Modal -->
+<div class="modal fade" id="itemModal" tabindex="-1" aria-labelledby="itemModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Закрити">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <div class="modal-content-wrapper">
+                <div class="slider-section">
+                    <div id="videoContainer" class="video-container" style="display: none;">
+                        <video controls autoplay>
+                            <source id="videoSource" type="video/mp4">
+                            Ваш браузер не підтримує відео.
+                        </video>
+                    </div>
+
+                    <div id="imageSlider" class="carousel slide image-slider" data-bs-ride="carousel">
+                        <div class="carousel-indicators" id="carouselIndicators"></div>
+                        <div class="carousel-inner" id="carouselInner"></div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#imageSlider" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Попереднє</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#imageSlider" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Наступне</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-header">
+                        <h2 id="itemModalLabel"></h2>
+                        <h6 id="modalGift"></h6>
+                        <div id="modalDescription" class="description-text"></div>
+                    </div>
+
+                    <div class="booking-area">
+                        <div id="reservedMessage" class="alert alert-warning" style="display: none;">
+                            <strong>Цей товар вже заброньовано</strong>
+                        </div>
+
+                        <div id="bookingSection" style="display: none;">
+                            <button id="bookButton" class="btn btn-primary btn-lg w-100">
+                                Забронювати
+                            </button>
+
+                            <form id="bookingForm" class="booking-form" novalidate>
+                                <h5 class="mb-3">Заповніть форму для бронювання</h5>
+                                <div class="mb-3">
+                                    <label for="userName" class="form-label">Ім'я *</label>
+                                    <input type="text" class="form-control" id="userName" required>
+                                    <div class="invalid-feedback">Будь ласка, введіть ваше ім'я</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="userPhone" class="form-label">Телефон *</label>
+                                    <input type="tel" class="form-control" id="userPhone" placeholder="+380..." required>
+                                    <div class="invalid-feedback">Будь ласка, введіть коректний номер телефону</div>
+                                </div>
+                                <button type="button" id="confirmButton" class="btn btn-success w-100 btn-lg" disabled>
+                                    Підтвердити бронювання
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Constants
+    const SELECTORS = {
+        loader: '.loader',
+        catalogGrid: '#catalogGrid',
+        modal: '#itemModal',
+        itemModalLabel: '#itemModalLabel',
+        modalGift: '#modalGift',
+        modalDescription: '#modalDescription',
+        videoContainer: '#videoContainer',
+        videoSource: '#videoSource',
+        imageSlider: '#imageSlider',
+        carouselInner: '#carouselInner',
+        carouselIndicators: '#carouselIndicators',
+        reservedMessage: '#reservedMessage',
+        bookingSection: '#bookingSection',
+        bookingForm: '#bookingForm',
+        bookButton: '#bookButton',
+        confirmButton: '#confirmButton',
+        userName: '#userName',
+        userPhone: '#userPhone'
+    };
+
+    // State
+    const state = {
+        items: [],
+        currentItem: null,
+        modal: null
+    };
+
+    // DOM Helpers
+    const $ = selector => document.querySelector(selector);
+    const $$ = selector => document.querySelectorAll(selector);
+    const createElement = (tag, className, content) => {
+        const el = document.createElement(tag);
+        if (className) el.className = className;
+        if (content) el.innerHTML = content;
+        return el;
+    };
+
+    // API
+    const api = {
+        async loadItems() {
+            const response = await fetch(`/api/letters`);
+            if (!response.ok) throw new Error('Помилка завантаження');
+            return response.json();
+        },
+
+        async reserve(id, name, phone) {
+            const response = await fetch(`/api/reserve`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, name, phone })
+            });
+            return response.json();
+        }
+    };
+
+    // UI Components
+    const ui = {
+        showLoader() {
+            $(SELECTORS.loader).classList.add('active');
+        },
+
+        hideLoader() {
+            $(SELECTORS.loader).classList.remove('active');
+        },
+
+        showError(message) {
+            $(SELECTORS.loader).innerHTML = `
+                <div class="alert alert-danger">${message}</div>
+            `;
+        },
+
+        createCard(item) {
+            const col = createElement('div', 'col-12 col-md-6 col-lg-3');
+            const reservedBadge = item.reserved ? '<div class="reserved-badge">Заброньовано</div>' : '';
+
+            col.innerHTML = `
+                <div class="card ${item.reserved ? 'reserved' : ''}" data-id="${item.id}">
+                    ${reservedBadge}
+                    <img src="${item.image}" class="card-img-top" alt="${item.recipient}">
+                    <div class="card-body">
+                        <h5 class="card-title">${item.recipient}</h5>
+                        <p class="card-text card-description">${item.info}</p>
+                    </div>
+                </div>
+            `;
+
+            if (!item.reserved) {
+                col.querySelector('.card').addEventListener('click', () => modal.open(item));
+            }
+
+            return col;
+        },
+
+        renderCatalog(items) {
+            const grid = $(SELECTORS.catalogGrid);
+            grid.innerHTML = '';
+            items.forEach(item => grid.appendChild(ui.createCard(item)));
+        }
+    };
+
+    // Modal Handler
+    const modal = {
+        init() {
+            state.modal = new bootstrap.Modal($(SELECTORS.modal));
+
+            $(SELECTORS.modal).addEventListener('hidden.bs.modal', () => {
+                const video = $(`${SELECTORS.videoContainer} video`);
+                if (video) {
+                    video.pause();
+                    video.currentTime = 0;
+                }
+            });
+        },
+
+        open(item) {
+            state.currentItem = item;
+
+            $(SELECTORS.itemModalLabel).textContent = item.recipient;
+            $(SELECTORS.modalGift).textContent = item.info;
+            $(SELECTORS.modalDescription).innerHTML = `<p>${item.description}</p>`;
+
+            this.setupMedia(item);
+            this.setupBooking(item);
+            form.reset();
+
+            state.modal.show();
+        },
+
+        setupMedia(item) {
+            const videoContainer = $(SELECTORS.videoContainer);
+            const imageSlider = $(SELECTORS.imageSlider);
+
+            if (item.video) {
+                $(SELECTORS.videoSource).src = item.video;
+                $(`${SELECTORS.videoContainer} video`).load();
+                videoContainer.style.display = 'flex';
+                imageSlider.style.display = 'none';
+            } else {
+                videoContainer.style.display = 'none';
+                imageSlider.style.display = 'block';
+                this.setupImageSlider(item);
+            }
+        },
+
+        setupImageSlider(item) {
+            const images = Array.isArray(item.images) && item.images.length > 0
+                ? item.images
+                : [item.image];
+
+            const carouselInner = $(SELECTORS.carouselInner);
+            const carouselIndicators = $(SELECTORS.carouselIndicators);
+
+            carouselInner.innerHTML = '';
+            carouselIndicators.innerHTML = '';
+
+            images.forEach((img, i) => {
+                const slide = createElement('div', `carousel-item ${i === 0 ? 'active' : ''}`);
+                slide.innerHTML = `<img src="${img}" alt="${item.recipient} - зображення ${i + 1}">`;
+                carouselInner.appendChild(slide);
+
+                if (images.length > 1) {
+                    const indicator = document.createElement('button');
+                    indicator.type = 'button';
+                    indicator.setAttribute('data-bs-target', SELECTORS.imageSlider);
+                    indicator.setAttribute('data-bs-slide-to', i);
+                    indicator.setAttribute('aria-label', `Слайд ${i + 1}`);
+                    if (i === 0) indicator.className = 'active';
+                    carouselIndicators.appendChild(indicator);
+                }
+            });
+
+            const showControls = images.length > 1;
+            $$('.carousel-control-prev, .carousel-control-next').forEach(el => {
+                el.style.display = showControls ? 'flex' : 'none';
+            });
+            $(SELECTORS.carouselIndicators).style.display = showControls ? 'flex' : 'none';
+        },
+
+        setupBooking(item) {
+            if (item.reserved) {
+                $(SELECTORS.reservedMessage).style.display = 'block';
+                $(SELECTORS.bookingSection).style.display = 'none';
+            } else {
+                $(SELECTORS.reservedMessage).style.display = 'none';
+                $(SELECTORS.bookingSection).style.display = 'block';
+                $(SELECTORS.bookingForm).classList.remove('active');
+            }
+        }
+    };
+
+    // Form Handler
+    const form = {
+        init() {
+            $(SELECTORS.bookButton).addEventListener('click', () => {
+                $(SELECTORS.bookingForm).classList.add('active');
+                $(SELECTORS.bookButton).style.display = 'none';
+            });
+
+            [$(SELECTORS.userName), $(SELECTORS.userPhone)].forEach(input => {
+                input.addEventListener('input', () => this.validate());
+            });
+
+            $(SELECTORS.confirmButton).addEventListener('click', () => this.submit());
+        },
+
+        validate() {
+            const userName = $(SELECTORS.userName);
+            const userPhone = $(SELECTORS.userPhone);
+            const confirmButton = $(SELECTORS.confirmButton);
+
+            const nameValid = userName.value.trim().length > 0;
+            const phoneValid = userPhone.value.trim().length >= 10;
+
+            userName.classList.toggle('is-invalid', userName.value && !nameValid);
+            userName.classList.toggle('is-valid', nameValid);
+
+            userPhone.classList.toggle('is-invalid', userPhone.value && !phoneValid);
+            userPhone.classList.toggle('is-valid', phoneValid);
+
+            confirmButton.disabled = !(nameValid && phoneValid);
+        },
+
+        async submit() {
+            const confirmButton = $(SELECTORS.confirmButton);
+            const userName = $(SELECTORS.userName).value.trim();
+            const userPhone = $(SELECTORS.userPhone).value.trim();
+
+            confirmButton.disabled = true;
+            confirmButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Обробка...';
+
+            try {
+                const result = await api.reserve(state.currentItem.id, userName, userPhone);
+
+                if (result.success) {
+                    const itemIndex = state.items.findIndex(i => i.id === state.currentItem.id);
+                    if (itemIndex !== -1) {
+                        state.items[itemIndex].reserved = true;
+                    }
+
+                    state.modal.hide();
+                    ui.renderCatalog(state.items);
+                    alert('Бронювання успішно підтверджено! Дякуємо!');
+                } else {
+                    throw new Error(result.message || 'Помилка бронювання');
+                }
+            } catch (error) {
+                console.error('Помилка:', error);
+                alert('Виникла помилка при бронюванні. Спробуйте ще раз.');
+                confirmButton.disabled = false;
+                confirmButton.textContent = 'Підтвердити бронювання';
+            }
+        },
+
+        reset() {
+            $(SELECTORS.userName).value = '';
+            $(SELECTORS.userPhone).value = '';
+            $(SELECTORS.userName).classList.remove('is-valid', 'is-invalid');
+            $(SELECTORS.userPhone).classList.remove('is-valid', 'is-invalid');
+            $(SELECTORS.confirmButton).disabled = true;
+            $(SELECTORS.confirmButton).textContent = 'Підтвердити бронювання';
+            $(SELECTORS.bookButton).style.display = 'block';
+        }
+    };
+
+    // App Initialization
+    async function init() {
+        try {
+            modal.init();
+            form.init();
+
+            state.items = await api.loadItems();
+            ui.renderCatalog(state.items);
+            ui.hideLoader();
+        } catch (error) {
+            console.error('Помилка:', error);
+            ui.showError('Помилка завантаження товарів. Спробуйте оновити сторінку.');
+        }
+    }
+
+    // Start app
+    document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
