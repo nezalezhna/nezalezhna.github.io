@@ -153,6 +153,7 @@
 
         .carousel-item {
             height: 100%;
+            position: relative;
         }
 
         .carousel-item img {
@@ -163,6 +164,7 @@
             object-fit: contain;
             margin: 0 auto;
             display: block;
+            cursor: pointer;
         }
 
         .carousel-control-prev,
@@ -208,6 +210,7 @@
         /* Info Section */
         .info-header {
             margin-bottom: 30px;
+            flex-shrink: 0;
         }
 
         .info-header h2 {
@@ -226,6 +229,8 @@
 
         .booking-area {
             margin-top: auto;
+            flex-shrink: 0;
+            padding-top: 20px;
         }
 
         .booking-form {
@@ -277,6 +282,7 @@
             .info-section {
                 flex: 1 1 auto;
                 min-height: 50vh;
+                max-height: 50vh;
             }
 
             .image-slider,
@@ -299,6 +305,7 @@
             .info-section {
                 padding: 20px;
                 min-height: 60vh;
+                max-height: 60vh;
             }
 
             .info-header h2 {
@@ -314,6 +321,16 @@
 
             .catalog-header {
                 height: 140px;
+            }
+
+            /* Ensure booking area is visible on mobile */
+            .booking-area {
+                position: sticky;
+                bottom: 0;
+                background: white;
+                padding: 15px 0;
+                margin-top: 20px;
+                border-top: 1px solid #eee;
             }
         }
     </style>
@@ -613,7 +630,9 @@
 
             images.forEach((img, i) => {
                 const slide = createElement('div', `carousel-item ${i === 0 ? 'active' : ''}`);
-                slide.innerHTML = `<img src="${img}" alt="${item.recipient} - зображення ${i + 1}">`;
+                slide.innerHTML = `
+                    <img src="${img}" alt="${item.recipient} - зображення ${i + 1}" onclick="window.open('${img}', '_blank')">
+                `;
                 carouselInner.appendChild(slide);
 
                 if (images.length > 1) {
