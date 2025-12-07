@@ -134,6 +134,7 @@
             padding: 40px;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         /* Image Slider */
@@ -191,6 +192,34 @@
             background-color: #fff;
         }
 
+        /* Open in new tab button */
+        .open-image-btn {
+            position: absolute;
+            bottom: 1px;
+            left: 1px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .open-image-btn:hover {
+            background: #fff;
+            transform: scale(1.1);
+        }
+
+        .open-image-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
         /* Video Container */
         .video-container {
             width: 100%;
@@ -228,14 +257,21 @@
         }
 
         .booking-area {
-            margin-top: auto;
+            margin-top: 20px;
             flex-shrink: 0;
-            padding-top: 20px;
         }
 
         .booking-form {
             display: none;
-            margin-top: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            padding: 40px;
+            z-index: 10;
+            overflow-y: auto;
         }
         .booking-form.active { display: block; }
 
@@ -325,12 +361,11 @@
 
             /* Ensure booking area is visible on mobile */
             .booking-area {
-                position: sticky;
-                bottom: 0;
-                background: white;
-                padding: 15px 0;
                 margin-top: 20px;
-                border-top: 1px solid #eee;
+            }
+
+            .booking-form {
+                padding: 20px;
             }
         }
     </style>
@@ -444,25 +479,30 @@
                             <button id="bookButton" class="btn btn-primary btn-lg w-100">
                                 Забронювати
                             </button>
-
-                            <form id="bookingForm" class="booking-form" novalidate>
-                                <h5 class="mb-3">Заповніть форму для бронювання</h5>
-                                <div class="mb-3">
-                                    <label for="userName" class="form-label">Ім'я *</label>
-                                    <input type="text" class="form-control" id="userName" required>
-                                    <div class="invalid-feedback">Будь ласка, введіть ваше ім'я</div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="userPhone" class="form-label">Телефон *</label>
-                                    <input type="tel" class="form-control" id="userPhone" placeholder="+380..." required>
-                                    <div class="invalid-feedback">Будь ласка, введіть коректний номер телефону</div>
-                                </div>
-                                <button type="button" id="confirmButton" class="btn btn-success w-100 btn-lg" disabled>
-                                    Підтвердити бронювання
-                                </button>
-                            </form>
                         </div>
                     </div>
+
+                    <form id="bookingForm" class="booking-form" novalidate>
+                        <button type="button" class="btn btn-link position-absolute top-0 end-0 m-3" id="closeFormButton">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        <h5 class="mb-3">Заповніть форму для бронювання</h5>
+                        <div class="mb-3">
+                            <label for="userName" class="form-label">Ім'я *</label>
+                            <input type="text" class="form-control" id="userName" required>
+                            <div class="invalid-feedback">Будь ласка, введіть ваше ім'я</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userPhone" class="form-label">Телефон *</label>
+                            <input type="tel" class="form-control" id="userPhone" placeholder="+380..." required>
+                            <div class="invalid-feedback">Будь ласка, введіть коректний номер телефону</div>
+                        </div>
+                        <button type="button" id="confirmButton" class="btn btn-success w-100 btn-lg" disabled>
+                            Підтвердити бронювання
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -631,6 +671,11 @@
             images.forEach((img, i) => {
                 const slide = createElement('div', `carousel-item ${i === 0 ? 'active' : ''}`);
                 slide.innerHTML = `
+                    <button class="open-image-btn" onclick="window.open('${img}', '_blank')" title="Відкрити в новій вкладці">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </button>
                     <img src="${img}" alt="${item.recipient} - зображення ${i + 1}" onclick="window.open('${img}', '_blank')">
                 `;
                 carouselInner.appendChild(slide);
@@ -670,8 +715,16 @@
         init() {
             $(SELECTORS.bookButton).addEventListener('click', () => {
                 $(SELECTORS.bookingForm).classList.add('active');
-                $(SELECTORS.bookButton).style.display = 'none';
             });
+
+            // Close form button
+            const closeFormBtn = document.getElementById('closeFormButton');
+            if (closeFormBtn) {
+                closeFormBtn.addEventListener('click', () => {
+                    $(SELECTORS.bookingForm).classList.remove('active');
+                    this.reset();
+                });
+            }
 
             [$(SELECTORS.userName), $(SELECTORS.userPhone)].forEach(input => {
                 input.addEventListener('input', () => this.validate());
@@ -735,7 +788,6 @@
             $(SELECTORS.userPhone).classList.remove('is-valid', 'is-invalid');
             $(SELECTORS.confirmButton).disabled = true;
             $(SELECTORS.confirmButton).textContent = 'Підтвердити бронювання';
-            $(SELECTORS.bookButton).style.display = 'block';
         }
     };
 
