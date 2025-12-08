@@ -412,13 +412,28 @@
 
 <main class="py-5 bg-light">
     <div class="container">
-        <div class="catalog-header" role="banner"></div>
+        <div class="row ">
+            <div class="col-sm-12">
+                <div class="d-none d-lg-block">
+                    <img src="letters/desktop.png" class="card-img-top">
+                </div>
 
-        <div class="loader active" role="status">
-            <div class="spinner-border text-primary">
-                <span class="visually-hidden">Завантаження...</span>
+                <div class="d-xl-none d-lg-none">
+                    <img src="letters/mobile.png" class="card-img-top" style="height: auto">
+                </div>
+                <br>
             </div>
-            <p class="mt-3">Завантаження листів...</p>
+        </div>
+
+        <div class="row ">
+            <div class="col-sm-12">
+                <div class="loader active" role="status">
+                    <div class="spinner-border text-primary">
+                        <span class="visually-hidden">Завантаження...</span>
+                    </div>
+                    <p class="mt-3">Завантаження листів...</p>
+                </div>
+            </div>
         </div>
 
         <div id="catalogGrid" class="row g-4"></div>
